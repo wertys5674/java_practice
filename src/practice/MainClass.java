@@ -1,60 +1,43 @@
 package practice;
 
-import java.sql.SQLOutput;
-
-class product {
-    int price;
-    int bonusPoint;
-
-    product(int price){
-        this.price=price;
-        this.bonusPoint+=(int)(price/10.0);
+abstract class Unit {
+    int x,y;
+    abstract void move (int x,int y);
+    void stop(){
+        System.out.println("종료합니다.");
     }
 }
-class Tv extends product{
-    Tv(){
-        super(100);
-    }
-    public String toString() {return "Tv";}
+interface Fight { //interface 의 모든 메서드는 모두 public 이다.
+    public abstract void move (int x,int y);
+    public abstract void attack(Fight f);
 }
 
-class Radio extends product{
-    Radio(){
-        super(50);
+class Fighter extends Unit implements Fight {
+    //오버라이딩 규칙 : 조상보다 범위가 넓으면 안된다. 조상이 public 이라, 아래의 구현도 public 으로 해줘야한다.
+    public void move(int x,int y){
+        System.out.println("x="+x+"y="+y+"로 이동하였습니다.");
     }
-    public String toString() {return "Radio";}
-}
-
-class Car extends product{
-    Car(){
-        super(300);
+    public void attack(Fight f){
+        System.out.println(f+"위치로 공격 명령");
     }
-    public String toString() {return "Car";}
-}
-
-class Custumer {
-    int budget =1000;
-    int totalBp;
-    void buy(product p){
-        if(budget<p.price){
-            System.out.println("ㅈㅇㅂㅈ");
-            return;
-        }
-        budget-=p.price;
-        totalBp += p.bonusPoint;
-       // p.bonusPoint+=p.bonusPoint;
-        System.out.println(p.toString()+"를 구매했습니다.");
-        System.out.println(this.totalBp+"의 포인트가 적립되어있습니다.");
-    }
-
 }
 public class MainClass {
     public static void main(String[] args){
-    Custumer Hong=new Custumer();
-    Hong.buy(new Tv());
-    Hong.buy(new Radio());
-    Hong.buy(new Car());
-        System.out.println("잔액은 "+Hong.budget+"입니다.");
+        Unit u =new Fighter();
+        Fight f =new Fighter();
+        Fighter f2 =new Fighter();
+
+        u.move(100,200);
+        u.stop();
+        //u.attack();   Unit 에는 attack method 가 없다. ERROR
+
+        f.move(200,300);
+        //f.stop(); Fight interface 가 stop() method 가 없음
+        f.attack(f);
+
+        f2.move(300,400);
+        f2.stop();
+        f2.attack(f2);
     }
 }
 
