@@ -1,7 +1,7 @@
 package practice;
 
-class Dropship extends Unit implements flyableUnit {
-    public Dropship(){
-        super("Dropship",0);
+class Dropship extends Unit implements FlyableUnit {
+    public Dropship() {
+        super("Dropship", 0);
     }
 }

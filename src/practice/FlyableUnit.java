@@ -1,5 +1,5 @@
 package practice;
 
-interface flyableUnit {
+interface FlyableUnit {
     abstract void fly();
 }
