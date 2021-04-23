@@ -1,5 +1,6 @@
 package practicejava;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 class Student {
@@ -72,8 +73,21 @@ class Myclass {
         str3 = "new string";
         System.out.println(str3); // 기존 str3 에 있던 문자열은 그대로 남아있고, 새로운 문자열이 생겨서 그 주소를 str3이 가리키는 구조.
         StringBuffer sb = new StringBuffer("This is String Buffer");
-        System.out.println(sb);
-        sb.append(3);
-        System.out.println(sb);
+        StringBuffer sb1 =new StringBuffer("This is String Buffer");
+        System.out.println(sb.equals(sb1));
+        // StringBuffer 는 equals 가 Overriding 되어있지 않아서 주소를 비교한다. 그래서 toString() 매서드를 이용하여 String으로 변환.
+        String strb = sb.toString();
+        String strb1 = sb1.toString();
+        System.out.println(strb.equals(strb1));
+        System.out.println(sb.capacity());
+        System.out.println(sb.length());
+        int i = new Integer("13123").intValue();
+        System.out.println(i);
+
+        //Calendar Class Prac
+        //Calendar cal = new Calendar(); 이거 안된다. Calendar Class 는 Abstract class.
+        Calendar cal = Calendar.getInstance();
+        int thisyear = cal.get(Calendar.YEAR);
+        System.out.println(thisyear);
     }
 }
